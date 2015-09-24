@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="author" content="Jasminechoi@qq.com">
+		<title>闪屏页测试</title>
+		
+		<style>
+			html,body{height: 100%;}
+			html,body,iframe,footer,img{margin: 0px 0px;padding: 0px 0px;}
+			.poster-main{width: 100%;border: none;overflow: auto;position: absolute;top: 0px;left: 0px;}
+			.footer{position: absolute;left: 0px;}
+			.footer img{width: 100%; display: block;}
+		</style>
+	</head>
+	
+	<body>
+		<iframe class="poster-main" src="http://www.baidu.com"></iframe>
+		<footer class="footer">
+			<img src="logo.png" />
+		</footer>
+		
+		<!-- js begin -->
+		<script src="http://tools.youwoxing.net/js/jquery-2.1.4.min.js"></script>
+		<script>
+			;(function($){
+				var Poster = function(posterBox, foot){
+					var winH = $(document).height();
+					var footH = foot.height();
+					this.height = winH - footH;
+					
+					posterBox.height(this.height);
+					foot.css("top", this.height + "px");
+				}
+				Poster.init = function(posterBox, foot){
+					return new this(posterBox, foot);
+				}
+				window["Poster"] = Poster;
+			})(jQuery);
+			
+			$(function(){
+				Poster.init($(".poster-main"), $(".footer"));
+			});
+		</script>
+	</body>
+</html>
